@@ -1,38 +1,48 @@
+import {
+  ClockIcon,
+  DashboardIcon,
+  GearIcon,
+  HomeIcon,
+  LayersIcon,
+  UploadIcon,
+  VideoIcon,
+} from "@radix-ui/react-icons";
+
 export const sidebarLinks = [
   {
     label: "Home",
     route: "/",
-    imgUrl: "/icons/house.svg",
+    iconCompoent: HomeIcon,
   },
   {
     label: "recording",
     route: "/recording",
-    imgUrl: "/icons/video.svg",
+    iconCompoent: VideoIcon,
   },
   ,
   {
     label: "history",
     route: "/history",
-    imgUrl: "/icons/history.svg",
+    iconCompoent: ClockIcon,
   },
   {
     label: "uploading",
     route: "/uploading",
-    imgUrl: "/icons/cloud.svg",
+    iconCompoent: UploadIcon,
   },
   {
     label: "dashboard",
     route: "/dashboard",
-    imgUrl: "/icons/star.svg",
+    iconCompoent: DashboardIcon,
   },
   {
     label: "job",
     route: "/job",
-    imgUrl: "/icons/headset.svg",
+    iconCompoent: LayersIcon,
   },
   {
     label: "status",
     route: "/status",
-    imgUrl: "/icons/bolt.svg",
+    iconCompoent: GearIcon,
   },
 ];

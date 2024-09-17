@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import MobileNav from "./MobileNav";
+import { ModeToggle } from "./theme-toggle";
 
 const Navbar = () => {
   return (
-    <nav className="fixed z-30 border-b border-primary bg-gray-100 flex w-full justify-between px-6 py-4 lg:px-10">
+    <nav className="fixed z-30 flex w-full items-center justify-between border-b border-primary bg-primary-foreground px-6 py-4 lg:px-10">
       <Link href={"/"} className="flex items-center gap-2">
         <Image
           src={"/logo.png"}
@@ -14,9 +15,10 @@ const Navbar = () => {
           width={30}
           height={30}
         />
-        <p className="text-white max-sm:hidden">Biliup</p>
+        <h2 className="text-primary max-sm:hidden">Biliup</h2>
       </Link>
-      <div className="flex-between hidden gap-5 max-sm:block">
+      <div className="flex-between hidden items-center gap-5 max-sm:flex">
+        <ModeToggle />
         <MobileNav />
       </div>
     </nav>

@@ -8,7 +8,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <main className="relative">
+    <main className="relative bg-primary-foreground">
       <Navbar />
       <div className="flex">
         <LeftSidebar />

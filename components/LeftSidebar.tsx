@@ -4,12 +4,11 @@ import { sidebarLinks } from "@/constants/index";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { ModeToggle } from "./theme-toggle";
 const LeftSidebar = () => {
   const pathname = usePathname();
   return (
-    <section className="sticky border-r border-primary left-0 top-0 flex h-screen w-fit flex-col justify-between gap-40 p-6 pt-28 max-sm:hidden lg:w-[264px]">
+    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col justify-between gap-40 border-r border-primary p-6 pt-28 max-sm:hidden lg:w-[264px]">
       <div className="flex flex-1 flex-col gap-6">
         {sidebarLinks &&
           sidebarLinks.length > 0 &&
@@ -24,18 +23,21 @@ const LeftSidebar = () => {
                 className={cn(
                   "flex items-center justify-start gap-4 rounded-lg p-4",
                   {
-                    "bg-black": isActive,
-                    "text-white": isActive,
+                    "bg-primary/10": isActive,
                   },
                 )}
               >
-                <Image
-                  src={link.imgUrl}
-                  alt={link.label}
-                  width={28}
-                  height={28}
+                <link.iconCompoent
+                  width={30}
+                  height={20}
+                  widths={20}
+                  className="text-primary"
                 />
-                <p className="text-lg font-semibold text-primary max-lg:hidden">
+                <p
+                  className={cn(
+                    "text-lg font-semibold dark:text-primary max-lg:hidden",
+                  )}
+                >
                   {link.label}
                 </p>
               </Link>
