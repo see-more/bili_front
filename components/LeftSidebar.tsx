@@ -5,10 +5,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { ModeToggle } from "./theme-toggle";
 const LeftSidebar = () => {
   const pathname = usePathname();
   return (
-    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col justify-between gap-40 bg-gray-500 p-6 pt-28 text-white max-sm:hidden lg:w-[264px]">
+    <section className="sticky border-r border-primary left-0 top-0 flex h-screen w-fit flex-col justify-between gap-40 p-6 pt-28 max-sm:hidden lg:w-[264px]">
       <div className="flex flex-1 flex-col gap-6">
         {sidebarLinks &&
           sidebarLinks.length > 0 &&
@@ -34,20 +35,15 @@ const LeftSidebar = () => {
                   width={28}
                   height={28}
                 />
-                <p className="text-lg font-semibold max-lg:hidden">
+                <p className="text-lg font-semibold text-primary max-lg:hidden">
                   {link.label}
                 </p>
               </Link>
             );
           })}
       </div>
-      <div className="flex flex-1 items-center justify-center p-4 lg:justify-start">
-        <Image
-          src={"/icons/moon.svg"}
-          alt={"darkMode"}
-          height={25}
-          width={25}
-        />
+      <div className="flex items-center justify-center p-4 lg:justify-start">
+        <ModeToggle />
       </div>
     </section>
   );

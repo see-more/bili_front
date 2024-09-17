@@ -1,9 +1,27 @@
-import React from 'react'
+import GlobalconfigForm from "@/components/Globalconfigform";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import React from "react";
 
 const dashboard = () => {
   return (
-    <div>dashboard</div>
-  )
-}
+    <div>
+      <Tabs defaultValue="global_config">
+        <TabsList>
+          <TabsTrigger value="global_config">全局设置</TabsTrigger>
+          <TabsTrigger value="multi_platform_download">各平台下载</TabsTrigger>
+          <TabsTrigger value="developer_options">开发者选项</TabsTrigger>
+        </TabsList>
+        <TabsContent value="global_config">
+          <GlobalconfigForm />
+        </TabsContent>
+        <TabsContent value="multi_platform_download">
+          Change your password here.
+        </TabsContent>
+        <TabsContent value="developer_options">开发者选项</TabsContent>
+      </Tabs>
+    </div>
+  );
+};
 
-export default dashboard
+export default dashboard;

@@ -26,11 +26,17 @@ const MobileNav = () => {
           />
         </SheetTrigger>
 
-        <SheetContent side="left" className="border-none bg-gray-50">
+        <SheetContent side="left" className="border-none">
           <SheetHeader>
             <Link href={"/"} className="flex items-center gap-2">
-              <Image src={"/logo.png"} alt="biliup" width={30} height={30} />
-              <p className="text-black">Biliup</p>
+              <Image
+                priority={true}
+                src={"/logo.png"}
+                alt="biliup"
+                width={30}
+                height={30}
+              />
+              <p>Biliup</p>
             </Link>
           </SheetHeader>
           <div className="flex h-[cacl(100vh-72px)] flex-col items-start justify-around">
@@ -46,8 +52,7 @@ const MobileNav = () => {
                   className={cn(
                     "flex h-full w-full items-center justify-start gap-4 overflow-auto rounded-lg p-4",
                     {
-                      "bg-red-100": isActive,
-                      "text-white": isActive,
+                      "bg-primary": isActive,
                     },
                   )}
                 >
