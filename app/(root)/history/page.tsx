@@ -16,10 +16,11 @@ const History = () => {
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[100px]">名称</TableHead>
+            <TableHead>标题</TableHead>
+            <TableHead>链接</TableHead>
+            <TableHead>封面</TableHead>
+            <TableHead className="text-right">更新日期</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -27,6 +28,7 @@ const History = () => {
             <TableCell className="font-medium">INV001</TableCell>
             <TableCell>Paid</TableCell>
             <TableCell>Credit Card</TableCell>
+            <TableCell>$250.00</TableCell>
             <TableCell className="text-right">$250.00</TableCell>
           </TableRow>
         </TableBody>

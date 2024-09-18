@@ -79,7 +79,7 @@ const GlobalconfigForm = () => {
             height={30}
             width={30}
           />
-          <h1>全局下载配置</h1>
+          <h1 className="text-primary">全局下载配置</h1>
         </div>
         <FormField
           control={form.control}
@@ -277,7 +277,7 @@ const GlobalconfigForm = () => {
             height={25}
             width={25}
           />
-          <h1>全局下载配置</h1>
+          <h1 className="text-primary">全局下载配置</h1>
         </div>
         <FormField
           control={form.control}

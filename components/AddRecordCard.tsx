@@ -14,13 +14,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
-import { Card } from "@/components/ui/card";
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { PlusIcon } from "@radix-ui/react-icons";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -35,6 +39,7 @@ const formSchema = z.object({
   }),
 });
 const AddRecordCard = () => {
+  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,13 +54,17 @@ const AddRecordCard = () => {
     console.log(values);
   }
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Card className="flex h-full w-full flex-1 items-center justify-center hover:bg-card/10">
-          <PlusIcon width={50} height={50} />
+        <Card className="flex h-full w-full flex-1 flex-col items-center justify-center hover:bg-card/10">
+          <CardHeader></CardHeader>
+          <CardContent>
+            <PlusIcon width={50} height={50} />
+          </CardContent>
+          <CardFooter></CardFooter>
         </Card>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-[400px] sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-primary/90">
             录播管理
@@ -73,7 +82,9 @@ const AddRecordCard = () => {
                 name="remark"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-primary/90">录播备注</FormLabel>
+                    <FormLabel className="text-start text-primary/90">
+                      录播备注
+                    </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -81,9 +92,18 @@ const AddRecordCard = () => {
                   </FormItem>
                 )}
               />
-              <DialogFooter>
-                <Button type="submit">保存</Button>
-              </DialogFooter>
+              <Button
+                onClick={() => {
+                  if(!form.formState.isValid)
+                    return
+                  setOpen((open) => !open);
+                }}
+                variant={"ghost"}
+                type="submit"
+                className="bg-primary/10 text-primary"
+              >
+                保存
+              </Button>
             </form>
           </Form>
         </DialogHeader>

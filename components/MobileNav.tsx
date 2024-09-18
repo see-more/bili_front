@@ -5,6 +5,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
@@ -28,6 +29,10 @@ const MobileNav = () => {
         </SheetTrigger>
 
         <SheetContent side="left" className="flex flex-col border-none">
+          <VisuallyHidden.VisuallyHidden>
+            <SheetTitle>Dont remove this hidden titile</SheetTitle>
+          </VisuallyHidden.VisuallyHidden>
+
           <SheetHeader>
             <Link href={"/"} className="flex items-center gap-2">
               <Image
@@ -45,7 +50,7 @@ const MobileNav = () => {
               Dont remove this hidden description
             </SheetDescription>
           </VisuallyHidden.VisuallyHidden>
-          <div className="flex w-full flex-col mt-10">
+          <div className="mt-10 flex w-full flex-col">
             {sidebarLinks &&
               sidebarLinks.length > 0 &&
               sidebarLinks.map((link) => {
