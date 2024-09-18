@@ -22,6 +22,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Switch } from "./ui/switch";
+import { Separator } from "./ui/separator";
+import { DownloadIcon, UploadIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
   downloader: z.string().min(2, {
@@ -41,6 +43,11 @@ const formSchema = z.object({
   delay: z.number(),
   event_loop_interval: z.number(),
   pool1_size: z.number(),
+  submit_api: z.string(),
+  lines: z.string(),
+  threads: z.number(),
+  pool2_size: z.number(),
+  use_live_cover: z.boolean(),
 });
 
 const GlobalconfigForm = () => {
@@ -49,6 +56,11 @@ const GlobalconfigForm = () => {
     defaultValues: {
       downloader: "streamlink",
       segment_processor_parallel: false,
+      lines: "auto",
+      delay: 0,
+      pool1_size: 5,
+      threads: 3,
+      pool2_size: 3,
     },
   });
 
@@ -60,7 +72,15 @@ const GlobalconfigForm = () => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        <div className="flex items-center gap-2">
+          <DownloadIcon
+            className="rounded-lg bg-primary/10 p-1 text-primary"
+            height={30}
+            width={30}
+          />
+          <h1>全局下载配置</h1>
+        </div>
         <FormField
           control={form.control}
           name="downloader"
@@ -245,6 +265,126 @@ const GlobalconfigForm = () => {
               </FormControl>
               <FormDescription>
                 负责下载事件的线程池大小，用于限制最大同时录制数。
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Separator />
+        <div className="flex items-center gap-2">
+          <UploadIcon
+            className="rounded-lg bg-primary/10 p-1 text-primary"
+            height={25}
+            width={25}
+          />
+          <h1>全局下载配置</h1>
+        </div>
+        <FormField
+          control={form.control}
+          name="submit_api"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>提交接口</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="web">网页端</SelectItem>
+                  <SelectItem value="client">客户端</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                B站投稿提交接口，默认为自动选择。
+                <br />
+                全局默认上传插件选择。
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lines"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>上传路线</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue defaultValue={"auto"} />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="auto">auto</SelectItem>
+                  <SelectItem value="bda">bda</SelectItem>
+                  <SelectItem value="bda2">bda2</SelectItem>
+                  <SelectItem value="ws">ws</SelectItem>
+                  <SelectItem value="qn">qn</SelectItem>
+                  <SelectItem value="blsa">blsa</SelectItem>
+                  <SelectItem value="tx">tx</SelectItem>
+                  <SelectItem value="txa">txa</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                b站上传线路选择，默认为自动模式，可手动切换为bda, bda2, ws, qn,
+                bldsa, tx, txa
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="threads"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>上传并发</FormLabel>
+              <Input {...field} />
+              <FormDescription>
+                录像单文件大小限制，超过此大小分段下载，下载回放时无法使用
+                <br />
+                单位：Byte，示例：4294967296（4GB）
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pool2_size"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>上传线程池大小</FormLabel>
+              <Input {...field} />
+              <FormDescription>
+                负责上传事件的线程池大小。根据实际带宽设置。
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="use_live_cover"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>使用直播间封面作为投稿封面</FormLabel>
+              <FormControl>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    aria-readonly
+                  />
+                </FormControl>
+              </FormControl>
+              <FormDescription>
+                使用直播间封面作为投稿封面。此封面优先级低于单个主播指定的自定义封面，保存于cover文件夹下，上传后自动删除。
+                <br />
+                目前支持平台：哔哩哔哩，Twitch，YouTube。
               </FormDescription>
               <FormMessage />
             </FormItem>

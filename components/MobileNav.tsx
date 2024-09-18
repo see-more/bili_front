@@ -3,6 +3,7 @@ import React from "react";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -12,6 +13,7 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { TextAlignRightIcon } from "@radix-ui/react-icons";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 const MobileNav = () => {
   const pathname = usePathname();
   return (
@@ -38,44 +40,44 @@ const MobileNav = () => {
               <h2 className="text-primary">Biliup</h2>
             </Link>
           </SheetHeader>
-
-          <div className="flex flex-col items-start justify-self-end">
-            <div>
-              {sidebarLinks &&
-                sidebarLinks.length > 0 &&
-                sidebarLinks.map((link) => {
-                  if (link === undefined) return;
-                  const isActive =
-                    pathname === link.route ||
-                    pathname.startsWith(`${link.route}/`);
-                  return (
-                    <Link
-                      href={link.route}
-                      key={link.label}
-                      className={cn(
-                        "flex w-full items-center justify-start gap-4 rounded-lg p-4",
-                        {
-                          "bg-primary/10": isActive,
-                        },
-                      )}
+          <VisuallyHidden.VisuallyHidden>
+            <SheetDescription>
+              Dont remove this hidden description
+            </SheetDescription>
+          </VisuallyHidden.VisuallyHidden>
+          <div className="flex w-full flex-col mt-10">
+            {sidebarLinks &&
+              sidebarLinks.length > 0 &&
+              sidebarLinks.map((link) => {
+                if (link === undefined) return;
+                const isActive =
+                  pathname === link.route ||
+                  pathname.startsWith(`${link.route}/`);
+                return (
+                  <Link
+                    href={link.route}
+                    key={link.label}
+                    className={cn(
+                      "flex w-full items-center justify-start gap-4 rounded-lg p-4",
+                      {
+                        "bg-primary/10": isActive,
+                      },
+                    )}
+                  >
+                    <link.iconCompoent
+                      width={30}
+                      height={20}
+                      widths={20}
+                      className="text-primary"
+                    />
+                    <p
+                      className={cn("text-lg font-semibold dark:text-primary")}
                     >
-                      <link.iconCompoent
-                        width={30}
-                        height={20}
-                        widths={20}
-                        className="text-primary"
-                      />
-                      <p
-                        className={cn(
-                          "text-lg font-semibold dark:text-primary",
-                        )}
-                      >
-                        {link.label}
-                      </p>
-                    </Link>
-                  );
-                })}
-            </div>
+                      {link.label}
+                    </p>
+                  </Link>
+                );
+              })}
           </div>
         </SheetContent>
       </Sheet>

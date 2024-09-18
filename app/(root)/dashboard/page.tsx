@@ -1,4 +1,5 @@
 import GlobalconfigForm from "@/components/Globalconfigform";
+import Multiplatform from "@/components/Multiplatform";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import React from "react";
@@ -16,7 +17,7 @@ const dashboard = () => {
           <GlobalconfigForm />
         </TabsContent>
         <TabsContent value="multi_platform_download">
-          Change your password here.
+          <Multiplatform />
         </TabsContent>
         <TabsContent value="developer_options">开发者选项</TabsContent>
       </Tabs>

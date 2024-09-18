@@ -1,3 +1,4 @@
+import BiliForm from "@/components/multiplatform/BiliForm";
 import {
   ClockIcon,
   DashboardIcon,
@@ -44,5 +45,12 @@ export const sidebarLinks = [
     label: "status",
     route: "/status",
     iconCompoent: GearIcon,
+  },
+];
+
+export const multiplatFormItems = [
+  {
+    platform: "bilibili",
+    platformComponent: BiliForm,
   },
 ];
